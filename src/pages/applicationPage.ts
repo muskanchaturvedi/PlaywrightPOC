@@ -16,9 +16,8 @@ export class ApplicationPage extends BasePage {
   private infoIcon: Locator;
   private pageTitle: Locator;
   public supplementalLifeCheckbox: Locator;
-  public shortTermDisabilityCheckbox: Locator;
-  public longTermDisabilityCheckbox: Locator;
   public basicLifeCheckbox: Locator;
+  
 
   constructor(page: Page) {
     super(page);
@@ -33,10 +32,8 @@ export class ApplicationPage extends BasePage {
     this.nextButton = page.locator('button[id="btn-next"]'); 
     this.infoIcon = page.locator('button[id*="headlessui-menu-button"]'); 
     this.pageTitle = page.locator('.page-title');
-    this.supplementalLifeCheckbox = page.locator('input[type="checkbox"][value="Supplemental Life"]');
-    this.shortTermDisabilityCheckbox = page.locator('input[type="checkbox"][value="Short Term Disability"]');
-    this.longTermDisabilityCheckbox = page.locator('input[type="checkbox"][value="Long Term Disability"]');
-    this.basicLifeCheckbox = page.locator('input[type="checkbox"][value="Basic Life"]');
+    this.supplementalLifeCheckbox = page.locator('input[id="checkbox-item-0"]');
+    this.basicLifeCheckbox = page.locator('input[id="checkbox-item-1"]');
 
     
   }
@@ -95,8 +92,6 @@ export class ApplicationPage extends BasePage {
 
   async selectAllProducts() {
     await this.supplementalLifeCheckbox.check();
-    await this.shortTermDisabilityCheckbox.check();
-    await this.longTermDisabilityCheckbox.check();
     await this.basicLifeCheckbox.check();
   }
 

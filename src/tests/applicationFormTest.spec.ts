@@ -56,8 +56,6 @@ await applicationPage.verifyPageTitleContains("Select product(s)");
 
     // Verify that all checkboxes are selected
     await expect(applicationPage.supplementalLifeCheckbox).toBeChecked();
-    await expect(applicationPage.shortTermDisabilityCheckbox).toBeChecked();
-    await expect(applicationPage.longTermDisabilityCheckbox).toBeChecked();
     await expect(applicationPage.basicLifeCheckbox).toBeChecked();
     console.log("Verify all product checkboxes are selected");
 
