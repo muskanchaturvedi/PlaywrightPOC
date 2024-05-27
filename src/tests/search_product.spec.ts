@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
-import { HomePage } from './pages/homePage';
-import { ProductPage } from './pages/productPage';
-import { waitForPageLoad } from './utils/utility';
+import { HomePage } from '../pages/homePage';
+import { ProductPage } from '../pages/productPage';
+import { waitForPageLoad } from '../utils/wait.utils';
 
 (async () => {
   // Launch the browser

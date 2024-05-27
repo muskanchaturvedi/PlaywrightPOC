@@ -1,10 +1,11 @@
 import { chromium } from 'playwright';
-import { HomePage } from './pages/homePage';
-import { ProductPage } from './pages/productPage';
-import { CartPage } from './pages/cartPage';
-import { CheckoutPage } from './pages/checkoutPage';
-import { waitForPageLoad } from './utils/utility';
+import { HomePage } from '../pages/homePage';
+import { ProductPage } from '../pages/productPage';
 
+import { CartPage } from '../pages/cartPage';
+import { CheckoutPage } from '../pages/checkoutPage';
+
+import { waitForPageLoad } from '../utils/wait.utils';
 import { test, expect } from '@playwright/test';
 
 test('Automation Exercise E2E Test', async () => {

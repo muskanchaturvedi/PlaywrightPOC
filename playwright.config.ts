@@ -1,18 +1,15 @@
-import { defineConfig, devices } from '@playwright/test';
+import { PlaywrightTestConfig } from '@playwright/test';
 
-export default defineConfig({
-    testDir: './src',
-    use: {
-        headless: false, // Set to true if you want to run tests headlessly
-        baseURL: 'https://automationexercise.com/',
-        viewport: { width: 1280, height: 720 },
-        ignoreHTTPSErrors: true,
-    },
-    projects: [
-        {
-            name: 'chromium',
-            use: { ...devices['Desktop Chrome'] },
-        },
-    ],
-    timeout: 60000,
-});
+const config: PlaywrightTestConfig = {
+  use: {
+    browserName: 'chromium',
+    headless: false,  // Ensure headless is set to false
+    baseURL: 'https://d28j9pfwubj8q5.cloudfront.net/5U5PU/S2xbn',
+    viewport: { width: 1263, height: 4636 }, // Customize the viewport size
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+  },
+  testDir: 'src/tests',
+};
+
+export default config;

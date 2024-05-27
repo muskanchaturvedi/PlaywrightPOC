@@ -1,8 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { HomePage } from './pages/homePage';
-import { ProductPage } from './pages/productPage';
-import { waitForPageLoad } from './utils/utility';
-
+import { HomePage } from '../pages/homePage';
+import { ProductPage } from '../pages/productPage';
+import { waitForPageLoad } from '../utils/wait.utils';
 test('Search and interact with products', async ({ page }) => {
     const homePage = new HomePage(page);
     const productPage = new ProductPage(page);
