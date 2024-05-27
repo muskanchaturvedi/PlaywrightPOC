@@ -9,6 +9,7 @@ test.describe('Application Form Tests', () => {
     applicationPage = new ApplicationPage(page);
     await page.goto(config.baseUrl);
     console.log("URL Launched");
+    await applicationPage.waitForInvisibilityOfLoaderSpinner();
     await applicationPage.verifyWelcomeText();
     console.log("Verified 'Welcome' text is displayed");
     await applicationPage.clickOnGetStarted();
@@ -18,38 +19,51 @@ test.describe('Application Form Tests', () => {
   
   });
 
-  test('should verify radio buttons, buttons, and info icon are visible', async ({ page }) => {
+  test('should verify form elements and test radio buttons', async ({ page }) => {
     const applicationPage = new ApplicationPage(page);
 
+    // Verify radio buttons, buttons, and info icon are visible
     await applicationPage.verifyRadioButtons();
-     console.log("Verify both radio buttons are visible");
+    console.log("Verify both radio buttons are visible");
     
     await applicationPage.verifyButtonsAndIcon();
     console.log("Verify Back button, Next button, and info icon are visible");  
-  });
-  test('should test Employee radio button', async ({ page }) => {
-    const applicationPage = new ApplicationPage(page);
 
+    // Test Employee radio button functionality
     await applicationPage.selectEmployeeRadioButton();
-    console.log("Select the Employee radio button");  
+    console.log("Select the Employee radio button");
     
+    await applicationPage.waitForElementInVisibility(applicationPage.loadingSpinner);  
+    console.log("Wait for loader to disappear after selecting Employee");
+    await applicationPage.waitForElementVisibility(applicationPage.backButton);  
+    console.log("Additional steps to verify the form behavior after selecting Employee");
+    await applicationPage.clickBackButton();
+    await applicationPage.waitForElementInVisibility(applicationPage.loadingSpinner);  
+    // Test Spouse radio button functionality
+    await applicationPage.selectSpouseRadioButton();
+    console.log("Select the Spouse radio button");
+    await applicationPage.waitForElementInVisibility(applicationPage.pageDescription); 
+    await applicationPage.waitForElementInVisibility(applicationPage.loadingSpinner);  
+
+    
+//Select Product
+
+await applicationPage.verifyPageTitleContains("Select product(s)");
+//   console.log("Verify the page title contains 'Select product(s)'");
+
+    await applicationPage.selectAllProducts();
+    console.log("Select all product checkboxes");
+
+    // Verify that all checkboxes are selected
+    await expect(applicationPage.supplementalLifeCheckbox).toBeChecked();
+    await expect(applicationPage.shortTermDisabilityCheckbox).toBeChecked();
+    await expect(applicationPage.longTermDisabilityCheckbox).toBeChecked();
+    await expect(applicationPage.basicLifeCheckbox).toBeChecked();
+    console.log("Verify all product checkboxes are selected");
+
     await applicationPage.clickNextButton();
-    await applicationPage.waitForInvisibilityOfLoaderSpinner();
-  
-    console.log("Additional steps to verify the form behavior after selecting Employee"); 
-    await applicationPage.clickBackButton(); 
-    
+
   });
 
-  test('should test Spouse radio button', async ({ page }) => {
-    const applicationPage = new ApplicationPage(page);
-
-    await applicationPage.selectSpouseRadioButton(); 
-    console.log(" Select the Spouse radio button");   
-   
-    await applicationPage.clickNextButton();  
-    console.log("Click the Next button to proceed");  
-    
-  });
 });
 
