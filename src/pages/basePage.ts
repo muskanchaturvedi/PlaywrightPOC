@@ -11,7 +11,7 @@ export class BasePage {
     await locator.waitFor({ state: 'visible', timeout });
   }
 
-  async waitForElementInVisibility(locator: Locator, timeout: number = 30000) {
+  async waitForElementInVisibility(locator: Locator, timeout: number = 12000) {
     await locator.waitFor({ state: 'hidden', timeout });
   }
 
@@ -27,5 +27,13 @@ export class BasePage {
     await locator.click();
   }
 
+
+  async waitForPageLoad(timeout: number = 50000) {
+    await this.page.waitForLoadState('load', { timeout });
+  }
+
+  async hardWait(milliseconds: number) {
+    await this.page.waitForTimeout(milliseconds);
+  }
   
 }
