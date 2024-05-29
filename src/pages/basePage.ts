@@ -43,7 +43,7 @@ export class BasePage {
       if (await locator.isVisible() && await locator.isEnabled()) {
         return;
       }
-      await this.page.waitForTimeout(100); // Wait for 100 milliseconds before checking again
+      await this.page.waitForTimeout(100);
     }
     throw new Error(`Element ${locator} was not interactable within ${timeout} ms`);
   }

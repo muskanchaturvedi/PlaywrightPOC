@@ -24,9 +24,7 @@ export class ApplicationPage extends BasePage {
   public emailLabel: Locator;
   public emailInput: Locator;
   private basicLifeSlider: Locator;
-  private basicLifeAmount: Locator;
   private supplementalLifeSlider: Locator;
-  private supplementalLifeAmount: Locator;
   private dateOfBirthInput: Locator;
   private genderHeader: Locator;
   private femaleRadioButton: Locator;
@@ -84,9 +82,7 @@ export class ApplicationPage extends BasePage {
     this.emailLabel = page.locator('span[id="page-title"]');
     this.emailInput = page.locator('input[id="email-input"]');
     this.basicLifeSlider = page.locator('div.rc-slider-handle');
-    this.basicLifeAmount = page.locator('div#coverage-value');
     this.supplementalLifeSlider = page.locator('div.rc-slider-handle');
-    this.supplementalLifeAmount = page.locator('div#coverage-value');
     this.dateOfBirthInput = page.locator('input[id="date-input"]'); 
     this.genderHeader = page.locator('span[id="page-title"]');  
     this.femaleRadioButton = page.locator('input[id="option-item-1"]');
@@ -139,7 +135,6 @@ export class ApplicationPage extends BasePage {
 
   async verifyApplicationTypeTitle(){
     await this.waitForElementToBeInteractable(this.headingApplicationType);
-    console.log("Hello");
     await expect(this.headingApplicationType).toBeVisible();
     await expect(this.headingApplicationType).toContainText('Applicant type');
   }
