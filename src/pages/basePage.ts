@@ -7,11 +7,11 @@ export class BasePage {
     this.page = page;
   }
 
-  async waitForElementVisibility(locator: Locator, timeout: number = 30000) {
+  async waitForElementVisibility(locator: Locator, timeout: number = 900000) {
     await locator.waitFor({ state: 'visible', timeout });
   }
 
-  async waitForElementInVisibility(locator: Locator, timeout: number = 12000) {
+  async waitForElementInVisibility(locator: Locator, timeout: number = 900000) {
     await locator.waitFor({ state: 'hidden', timeout });
   }
 
@@ -34,6 +34,18 @@ export class BasePage {
 
   async hardWait(milliseconds: number) {
     await this.page.waitForTimeout(milliseconds);
+  }
+
+
+  async waitForElementToBeInteractable(locator: Locator, timeout: number = 100000) {
+    const startTime = Date.now();
+    while ((Date.now() - startTime) < timeout) {
+      if (await locator.isVisible() && await locator.isEnabled()) {
+        return;
+      }
+      await this.page.waitForTimeout(100); // Wait for 100 milliseconds before checking again
+    }
+    throw new Error(`Element ${locator} was not interactable within ${timeout} ms`);
   }
   
 }

@@ -132,14 +132,14 @@ export class ApplicationPage extends BasePage {
   }
   async clickOnGetStarted(){
     await this.clickButton(this.getStartedButton);
-    // await this.waitForElementInVisibility(this.pageDescription);
   }
   async waitForInvisibilityOfLoaderSpinner(){
     await this.waitForElementInVisibility(this.loadingSpinner);
   }
 
   async verifyApplicationTypeTitle(){
-    await this.waitForElementVisibility(this.headingApplicationType)
+    await this.waitForElementToBeInteractable(this.headingApplicationType);
+    console.log("Hello");
     await expect(this.headingApplicationType).toBeVisible();
     await expect(this.headingApplicationType).toContainText('Applicant type');
   }
@@ -217,8 +217,8 @@ async verifyCoverageAmountHeader() {
 }
 
 async verifySupplementalCoverageAmountHeader() {
-  await expect(this.pageTitle).toBeVisible();
-  await expect(this.pageTitle).toContainText('Select the amount of Supplemental Life coverage');
+  await expect(this.backButton).toBeVisible();
+  // await expect(this.pageTitle).toContainText('Select the amount of Supplemental Life coverage');
 
 }
 

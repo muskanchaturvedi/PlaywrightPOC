@@ -9,19 +9,17 @@ test.describe('Application Form Tests', () => {
     applicationPage = new ApplicationPage(page);
     await page.goto(config.baseUrl);
     console.log("URL Launched");
-    await applicationPage.hardWait(5000); 
     await applicationPage.waitForElementVisibility(applicationPage.greetText);
     await applicationPage.verifyWelcomeText();
     console.log("Verify 'Welcome' text is displayed");
-
-    // await applicationPage.waitForInvisibilityOfLoaderSpinner();
 
     await applicationPage.clickOnGetStarted();
     console.log("Clicked on get started button");
 
     await applicationPage.waitForInvisibilityOfLoaderSpinner();
 
-    await applicationPage.hardWait(20000); 
+    await applicationPage.waitForElementVisibility(applicationPage.headingApplicationType);
+  
 
     await applicationPage.verifyApplicationTypeTitle();
     console.log("Verified 'Application Type' title is displayed");
@@ -43,8 +41,6 @@ test.describe('Application Form Tests', () => {
     console.log("Selected the Spouse radio button");
 
     await applicationPage.waitForInvisibilityOfLoaderSpinner();
-
-    await applicationPage.hardWait(20000); 
 
     
 //Select Product type
@@ -93,7 +89,12 @@ await applicationPage.verifyPageTitleContains("Select product(s)");
 
      console.log("Click Next button");
 
-     await applicationPage.waitForElementVisibility(applicationPage.firstNameLabel);
+     await applicationPage.waitForElementInVisibility(applicationPage.emailLabel);
+
+     
+     await applicationPage.waitForInvisibilityOfLoaderSpinner();
+
+
 
      await applicationPage.verifyEmployeeNameHeader();
      console.log("Verify 'Employee Name Header' header is displayed and contains text");
@@ -108,15 +109,14 @@ await applicationPage.verifyPageTitleContains("Select product(s)");
      console.log("Click Next button");
 
 
-     await applicationPage.waitForElementVisibility(applicationPage.pageTitle);
-
+    await applicationPage.waitForInvisibilityOfLoaderSpinner();
 
 
 //Verify Coverage amount header is displayed
      await applicationPage.verifyCoverageAmountHeader();
 
      // Set Basic Life coverage amount
-     await applicationPage.setBasicLifeCoverage(25000);
+     await applicationPage.setBasicLifeCoverage(55000);
      console.log("Set Basic Life coverage amount");
  
      // Click Next button
